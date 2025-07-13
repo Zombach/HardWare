@@ -1,27 +1,18 @@
-namespace HardWare.Worker
+namespace HardWare.Worker;
+
+public sealed class Worker(HardWare hardWare, ILogger<Worker> logger)
+    : BackgroundService
 {
-    public class Worker : BackgroundService
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        private readonly HardWare _hardWare;
-        private readonly ILogger<Worker> _logger;
-
-        public Worker(HardWare hardWare, ILogger<Worker> logger)
+        var pc = new Pc();
+        while (!stoppingToken.IsCancellationRequested)
         {
-            _hardWare = hardWare;
-            _logger = logger;
+            pc.Start();
+            var isDone = hardWare.Start(pc.GetHardware());
+            logger.LogInformation($"update: {isDone}");
+            await Task.Delay(hardWare.Delay, stoppingToken);
         }
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            Pc pc = new();
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                pc.Start();
-                bool isDone = _hardWare.Start(pc.GetHardware()); 
-                _logger.LogInformation($"update: {isDone}");
-                await Task.Delay(_hardWare.Delay, stoppingToken);
-            }
-            pc.Close();
-        }
+        pc.Close();
     }
 }

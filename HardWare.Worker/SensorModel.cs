@@ -1,10 +1,10 @@
-﻿using System.Text.RegularExpressions;
 using HardWare.Worker.Enums;
 using LibreHardwareMonitor.Hardware;
+using System.Text.RegularExpressions;
 
 namespace HardWare.Worker;
 
-public class SensorModel
+public sealed class SensorModel
 {
     public string Name { get; set; }
     public TypeEnum Type { get; set; }
@@ -12,20 +12,15 @@ public class SensorModel
     public string ValueType { get; set; }
     public string Key { get; set; }
 
-    public SensorModel()
-    {
-        Name = string.Empty;
-        Type = TypeEnum.Unknown;
-        Value = string.Empty;
-        ValueType = string.Empty;
-        Key = string.Empty;
-    }
-
     public SensorModel(ISensor sensor)
     {
         Name = sensor.Name;
-        Type = Enum.TryParse($"{sensor.SensorType}", out TypeEnum type) ? type : TypeEnum.Unknown;
+        Type = Enum.TryParse($"{sensor.SensorType}", out TypeEnum type)
+            ? type
+            : TypeEnum.Unknown;
+
         Value = sensor.Value.ToString() ?? string.Empty;
+
         ValueType = Type switch
         {
             TypeEnum.Voltage => "V",
@@ -38,7 +33,8 @@ public class SensorModel
             TypeEnum.Data => "GB",
             _ => string.Empty
         };
-        Regex regex = new("[/\\\\-]");
+
+        var regex = new Regex("[/\\\\-]");
         Key = regex.Replace(sensor.Identifier.ToString(), string.Empty);
     }
 }

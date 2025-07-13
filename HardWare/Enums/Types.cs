@@ -1,9 +1,9 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HardWare.Enums;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum TypeEnum
+public enum Types
 {
     Unknown = 0,
     Temperature = 1,

@@ -1,6 +1,7 @@
-﻿namespace HardWare.Worker;
+namespace HardWare.Worker;
 
-public class Comparer : IComparer<SensorModel>
+public sealed class Comparer
+    : IComparer<SensorModel>
 {
     public int Compare(SensorModel? first, SensorModel? second)
     {

@@ -29,10 +29,9 @@
   },
   {
     "Name": "GPU Package",
-    "Type": "Power",
-    "Value": "49.152",
+    "Type": "Pv152",
     "ValueType": "W",
-    "Key": "gpunvidia0power0"
+    "Key": "v"
   },
   {
     "Name": "D3D Shared Memory Used",

@@ -2,20 +2,11 @@
 
 namespace HardWare;
 
-public class SensorModel
+public sealed class SensorModel
 {
-    public string Name { get; set; }
-    public TypeEnum Type { get; set; }
-    public string Value { get; set; }
-    public string ValueType { get; set; }
-    public string Key { get; set; }
-
-    public SensorModel()
-    {
-        Name = string.Empty;
-        Type = TypeEnum.Unknown;
-        Value = string.Empty;
-        ValueType = string.Empty;
-        Key = string.Empty;
-    }
+    public string Name { get; set; } = string.Empty;
+    public Types Type { get; set; } = Types.Unknown;
+    public string Value { get; set; } = string.Empty;
+    public string ValueType { get; set; } = string.Empty;
+    public string Key { get; set; } = string.Empty;
 }

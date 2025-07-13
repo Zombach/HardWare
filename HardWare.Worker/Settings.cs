@@ -1,6 +1,6 @@
-﻿namespace HardWare.Worker;
+namespace HardWare.Worker;
 
-public class Settings
+public sealed class Settings
 {
     public string PathData { get; set; }
 }

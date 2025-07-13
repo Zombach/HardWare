@@ -1,20 +1,8 @@
-﻿namespace HardWare;
+namespace HardWare;
 
-public class Settings
+public sealed class Settings
 {
-    //public Logging Logging { get; set; }
-    public string PathData { get; set; }
-    public string Delay { get; set; }
-
-
-    //public class Logging
-    //{
-    //    public Loglevel LogLevel { get; set; }
-    //}
-
-    //public class Loglevel
-    //{
-    //    public string Default { get; set; }
-    //    public string MicrosoftHostingLifetime { get; set; }
-    //}
+    public required string PathData { get; init; }
+    public required string Delay { get; init; }
+    public required string Version { get; init; }
 }

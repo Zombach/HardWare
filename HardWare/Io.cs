@@ -1,4 +1,4 @@
-﻿namespace HardWare;
+namespace HardWare;
 
 public class Io
 {
@@ -6,7 +6,7 @@ public class Io
     {
         try
         {
-            using StreamReader sr = new(path, new FileStreamOptions { Access = FileAccess.Read });
+            using var sr = new StreamReader(path, new FileStreamOptions { Access = FileAccess.Read });
             json = sr.ReadToEnd();
             return true;
         }

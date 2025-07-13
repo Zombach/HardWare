@@ -1,25 +1,21 @@
-﻿using LibreHardwareMonitor.Hardware;
+using LibreHardwareMonitor.Hardware;
 
 namespace HardWare.Worker;
 
-public class Pc
+public sealed class Pc
 {
-    private readonly Computer _computer;
-    public Pc()
+    private readonly Computer _computer = new()
     {
-        _computer = new()
-        {
-            IsCpuEnabled = true,
-            IsGpuEnabled = true,
-            IsMemoryEnabled = true,
-            IsMotherboardEnabled = true,
-            IsStorageEnabled = true,
-            IsBatteryEnabled = true,
-            IsPsuEnabled = false,
-            IsNetworkEnabled = false,
-            IsControllerEnabled = false
-        };
-    }
+        IsCpuEnabled = true,
+        IsGpuEnabled = true,
+        IsMemoryEnabled = true,
+        IsMotherboardEnabled = true,
+        IsStorageEnabled = true,
+        IsBatteryEnabled = true,
+        IsPsuEnabled = false,
+        IsNetworkEnabled = false,
+        IsControllerEnabled = false
+    };
 
     public void Start()
     {
@@ -27,7 +23,13 @@ public class Pc
         _computer.Accept(new UpdateVisitor());
     }
 
-    public List<IHardware> GetHardware() => _computer.Hardware.ToList();
+    public List<IHardware> GetHardware()
+    {
+        return _computer.Hardware.ToList();
+    }
 
-    public void Close() => _computer.Close();
+    public void Close()
+    {
+        _computer.Close();
+    }
 }
